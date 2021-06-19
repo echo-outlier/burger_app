@@ -12,8 +12,8 @@ export const Div = styled.div`
 `;
 
 export const NoOrders = styled.div`
-  font-size:40px;
-`
+  font-size: 40px;
+`;
 
 export const Innerdiv = styled.div`
   display: flex;
@@ -28,8 +28,8 @@ export const Innerdiv = styled.div`
   background-color: #ddd;
   box-shadow: 2px 2px 2px black;
   padding: 10px;
-  svg{
-    fill:#eee;
+  svg {
+    fill: #eee;
   }
 `;
 
@@ -53,11 +53,13 @@ export const IngredientsInfo = styled.div`
 `;
 
 export const Childdiv = styled.div`
-    border:2px solid black;
-    padding:5px;
-    text-align: center;
-    span{
-        font-weight: bold;
-        text-transform: capitalize;
-    }
-`
+  border: 2px solid black;
+  padding: 5px;
+  text-align: center;
+  span {
+    font-weight: bold;
+    text-transform: capitalize;
+
+    color: lightgray;
+  }
+`;

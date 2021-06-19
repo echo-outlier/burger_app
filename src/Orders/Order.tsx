@@ -26,8 +26,11 @@ const Order = (props) => {
     if (!props.token) {
       history.push("/");
     }
+    const userId = localStorage.getItem("userId");
+    const queryparam =
+      `?auth=${props.token}&orderBy="userId"&equalTo="${userId}"`
     axios
-      .get("/BurgerOrders.json")
+      .get(`/BurgerOrders.json${queryparam}` )
       .then((response) => {
         const data = response.data;
         let orders = [];

@@ -94,6 +94,7 @@ export const SubmitOrder = () => {
       const order = {
         ingredients: getState().burger.foodlist,
         price: getState().burger.price,
+        userId: getState().auth.userId,
         customer: {
           name: `${getState().checkout.first.value} ${
             getState().checkout.last.value

@@ -6,7 +6,6 @@ const initialState = {
   error: null,
   loading: false,
   redirect: "/",
-  redirectFrom: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,8 +32,6 @@ const reducer = (state = initialState, action) => {
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
       break;
-    case Types.REDIRECT_FROM:
-      prevstate.redirectFrom = action.location;
   }
   return prevstate;
 };

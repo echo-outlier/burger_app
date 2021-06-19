@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Burger from "./HomeScreen/BurgerDisplay/Burger";
 import styled from "styled-components";
 
@@ -9,7 +9,7 @@ import GlobalStyle from "./Globalstyles";
 import Order from "./Orders/Order";
 import { connect } from "react-redux";
 import Auth from "./Auth/auth";
-import { isAuthencated, RedirectFrom } from "./store/actions/authactions";
+import { isAuthencated } from "./store/actions/authactions";
 import Spinner from "./HomeScreen/Logo/Spinner";
 import { useHistory, useLocation } from "react-router-dom";
 import HomePage from "./HomePage";
@@ -29,11 +29,8 @@ const Backdrop = styled.div`
 
 const App = (props) => {
   const [menu, setmenu] = useState("none");
-  const location = useLocation();
   const history = useHistory();
-  console.log("PROPS");
-  // console.log(props.location.state.from);
-
+  console.log(process.env.REACT_APP_NOT_SECRET_CODE);
   useEffect(() => {
     props.isAuthenticated();
   }, []);
@@ -47,10 +44,6 @@ const App = (props) => {
   };
   if (props.loading) {
     return <Spinner />;
-  }
-  if (props.redirect == "auth") {
-    props.RedirectFrom(null);
-    history.push("/checkout");
   }
 
   return (
@@ -77,7 +70,7 @@ const App = (props) => {
             <Burger />
           </Checkout>
         </Route>
-        <Route path="/signup" component={Auth} />
+        <Route path="/auth" component={Auth} />
       </Div>
     </Backdrop>
   );
@@ -98,7 +91,6 @@ const mapStatetoProps = (state) => {
 const mapDispatchtoProps = (dispatch) => {
   return {
     isAuthenticated: () => dispatch(isAuthencated()),
-    RedirectFrom: (location) => dispatch(RedirectFrom(location)),
   };
 };
 

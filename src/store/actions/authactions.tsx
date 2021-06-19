@@ -44,11 +44,9 @@ export const auth = (email, password, isSignUp) => {
       password: password,
       returnSecureToken: true,
     };
-    let url =
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDPgYqUiGhW-gj68XansDmJI58J35lz09I";
+    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`;
     if (isSignUp) {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDPgYqUiGhW-gj68XansDmJI58J35lz09I";
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`;
     }
     axios
       .post(url, authdata)
@@ -78,7 +76,7 @@ export const isAuthencated = () => {
       };
       axios
         .post(
-          "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDPgYqUiGhW-gj68XansDmJI58J35lz09I",
+          `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_API_KEY}`,
           authData
         )
         .then((response) => {
@@ -90,12 +88,5 @@ export const isAuthencated = () => {
           console.log(error.response);
         });
     }
-  };
-};
-
-export const RedirectFrom = (location) => {
-  return {
-    type: Types.REDIRECT_FROM,
-    location: location,
   };
 };

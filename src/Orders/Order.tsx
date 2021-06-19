@@ -9,6 +9,7 @@ import {
   IngredientsInfo,
   Childdiv,
   Flex,
+  NoOrders,
 } from "./styles";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 import styled from "styled-components";
@@ -19,6 +20,7 @@ import Spinner from "../HomeScreen/Logo/Spinner";
 
 const Order = (props) => {
   const [orderlist, setorderlist] = useState(null);
+  const [spinner, setspinner] = useState(true);
   const history = useHistory();
   useEffect(() => {
     if (!props.token) {
@@ -27,35 +29,15 @@ const Order = (props) => {
     axios
       .get("/BurgerOrders.json")
       .then((response) => {
-        console.log(response.data);
         const data = response.data;
         let orders = [];
         Object.keys(data).map((order) => orders.push(data[`${order}`]));
         setorderlist(orders);
       })
       .catch((error) => {
-        console.log(error);
+        setspinner(false);
       });
   }, []);
-
-  const Text = styled(Skeleton)`
-    width: 200px;
-    height: 200px;
-    margin: 5px;
-  `;
-  const Rect = styled(Skeleton)`
-    width: 100%;
-    height: 120px;
-    margin: 5px;
-    .MuiSkeleton-root {
-      height: auto;
-    }
-  `;
-  const Circle = styled(Skeleton)`
-    width: 200px;
-    height: 200px;
-    margin: 5px;
-  `;
 
   return (
     <Div>
@@ -97,9 +79,10 @@ const Order = (props) => {
             </Innerdiv>
           );
         })
-      ) : (
+      ) : spinner ? (
         <Spinner />
-        // <Rect variant="rect" height={120} />
+      ) : (
+        <NoOrders>No Orders Placed</NoOrders>
       )}
     </Div>
   );

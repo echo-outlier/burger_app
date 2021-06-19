@@ -11,19 +11,26 @@ export const Div = styled.div`
   flex-direction: column;
 `;
 
+export const NoOrders = styled.div`
+  font-size:40px;
+`
+
 export const Innerdiv = styled.div`
   display: flex;
   width: 100%;
   height: 120px;
-  font-size:14px;
+  font-size: 14px;
   gap: 10px;
   justify-content: center;
   align-items: center;
-  /* border: 2px black solid; */
+  background: linear-gradient(to left, #4b79a1, #283e51);
   border-radius: 5px;
   background-color: #ddd;
-  box-shadow: 2px 2px 2px #aaa;
-  padding:10px;
+  box-shadow: 2px 2px 2px black;
+  padding: 10px;
+  svg{
+    fill:#eee;
+  }
 `;
 
 export const Flex = styled.div`
@@ -37,16 +44,12 @@ export const CustomerInfo = styled.div`
   display: flex;
   width: 100%;
   gap: 8px;
-  /* justify-content: center; */
-  /* align-items: center; */
 `;
 
 export const IngredientsInfo = styled.div`
   display: flex;
   width: 100%;
   gap: 18px;
-  /* justify-content: center; */
-  /* align-items: center; */
 `;
 
 export const Childdiv = styled.div`

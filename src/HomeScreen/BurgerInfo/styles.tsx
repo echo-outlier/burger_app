@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Button } from "../../Checkout/styles";
+import { AiFillPlusCircle } from "react-icons/ai";
+import { AiFillMinusCircle } from "react-icons/ai";
 
 interface ButtonProps {
   info: string;
@@ -27,13 +29,13 @@ export const Div1 = styled.div`
   h1 {
     text-align: start;
     font-size: 20px;
-    color:#ccc;
+    color: #ccc;
   }
   span {
     align-self: center;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
       "Helvetica Neue", sans-serif;
-    color:#ccc;
+    color: #ccc;
     font-size: 30px;
     justify-self: center;
   }
@@ -56,11 +58,37 @@ export const Buttonstyle = styled.button<ButtonProps>`
   border-radius: 20px;
   color: white;
   background-color: black;
-  justify-self: ${({ info }) =>
-    (info === "add" && "end") || (info === "subtract" && "start")};
   &:hover {
     background-color: #ccc;
     color: black;
+  }
+`;
+
+export const PlusButton = styled(AiFillPlusCircle)`
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  fill: #ddd;
+  cursor: pointer;
+  align-self: center;
+  display: flex;
+  justify-self: flex-end;
+  &:hover {
+    fill: black;
+  }
+`;
+
+export const MinusButton = styled(AiFillMinusCircle)`
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  fill: #ddd;
+  cursor: pointer;
+  align-self: center;
+  display: flex;
+  justify-self: flex-start;
+  &:hover {
+    fill: black;
   }
 `;
 
@@ -68,7 +96,7 @@ export const Hr = styled.hr`
   grid-column-start: 1;
   grid-column-end: 5;
   width: 100%;
-  color:white;
+  color: white;
 `;
 
 export const SubmitButton = styled(Button)`
@@ -89,6 +117,27 @@ export const SubmitButtonDisabled = styled.button`
   margin-bottom: 10px;
   cursor: pointer;
   font-weight: bold;
+  &:disabled {
+    &:hover {
+      ::after {
+        content: "Burger is EMPTY";
+        /* position: relative; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        color: white;
+        font-size: 12px;
+        margin-top: 10px;
+        height: 20px;
+        border: 2px solid black;
+        padding: 5px;
+        white-space: nowrap;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 5px;
+      }
+    }
+  }
 `;
 
 export const Price = styled.div`
@@ -100,3 +149,6 @@ export const Price = styled.div`
     font-family: Verdana, sans-serif;
   }
 `;
+
+// justify-self: ${({ info }) =>
+//   (info === "add" && "end") || (info === "subtract" && "start")};

@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { H1, Form, Div, Div1, Error, Inputdiv1, Button, Input } from "./styles";
 import { auth, isAuthencated } from "../store/actions/authactions";
 import Spinner from "../HomeScreen/Logo/Spinner";
-import { RedirectFrom } from "../store/actions/authactions";
 
 const Auth = (props) => {
   const [email, setemail] = useState("");
@@ -13,23 +12,27 @@ const Auth = (props) => {
   const [isup, setisup] = useState(false);
   const [CheckoutText, setCheckoutText] = useState(null);
   const history = useHistory();
+  const location = useHistory().location;
 
   const buttonhandler = (event) => {
     event.preventDefault();
     props.Auth(email, password, isup);
+    if (location.state) {
+      if (location.state.redirect) {
+        history.push({ pathname: location.state.redirect });
+      }
+    }
   };
 
   useEffect(() => {
     if (props.token) {
-      if (props.redirectFrom === "checkout") {
-        props.RedirectFrom("auth");
-        history.push("/checkout");
-      }
       history.push("/");
     }
 
-    if (props.redirectFrom === "checkout") {
-      setCheckoutText(<H1>Please Login Before Checking Out</H1>);
+    if (location.state) {
+      if (location.state) {
+        setCheckoutText(<H1>Please Login Before Checking Out</H1>);
+      }
     }
   }, []);
 
@@ -103,7 +106,6 @@ const mapDispatchtoProps = (dispatch) => {
   return {
     Auth: (email, password, isup) => dispatch(auth(email, password, isup)),
     isAuthenticated: () => dispatch(isAuthencated()),
-    RedirectFrom: (location) => dispatch(RedirectFrom(location)),
   };
 };
 

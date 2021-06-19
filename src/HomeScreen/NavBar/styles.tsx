@@ -68,25 +68,7 @@ export const Items1 = styled.button`
   cursor: pointer;
   background-color: inherit;
   border: none;
-  &:disabled {
-    &:hover {
-      ::after {
-        content: "Burger is EMPTY";
-        position: relative;
-        display: inline-block;
-        left: 0px;
-        bottom: -40px;
-        position: absolute;
-        color: white;
-        font-size: 12px;
-        border: 2px solid black;
-        padding: 5px;
-        white-space: nowrap;
-        background-color: rgba(0, 0, 0, 0.8);
-        border-radius: 5px;
-      }
-    }
-  }
+  
   &:enabled {
     &:hover {
       color: #d16b2b;

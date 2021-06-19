@@ -10,6 +10,8 @@ import {
   Flex,
   SubmitButton,
   SubmitButtonDisabled,
+  PlusButton,
+  MinusButton,
 } from "./styles";
 import { Add, Subtract, OpenModal } from "../../store/actions/burgeractions";
 
@@ -23,13 +25,11 @@ const BurgerInfo = (props: any) => {
           return (
             <React.Fragment key={food}>
               <h1>{food}</h1>
-              <Buttonstyle onClick={() => props.Add(food)} info="add">
-                +
-              </Buttonstyle>
+              <PlusButton onClick={() => props.Add(food)}>+</PlusButton>
               <span>{food_data[`${food}`]}</span>
-              <Buttonstyle onClick={() => props.Subtract(food)} info="subtract">
+              <MinusButton onClick={() => props.Subtract(food)}>
                 -
-              </Buttonstyle>
+              </MinusButton>
               <Hr />
             </React.Fragment>
           );

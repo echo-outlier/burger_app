@@ -1,0 +1,19 @@
+const Text = styled(Skeleton)`
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+  `;
+  const Rect = styled(Skeleton)`
+    width: 100%;
+    height: 120px;
+    margin: 5px;
+    .MuiSkeleton-root {
+      height: auto;
+    }
+  `;
+  const Circle = styled(Skeleton)`
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+  `;
+   // <Rect variant="rect" height={120} />

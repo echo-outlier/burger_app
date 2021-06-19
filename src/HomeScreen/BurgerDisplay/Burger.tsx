@@ -2,6 +2,7 @@ import React from "react";
 import BurgerIngredient from "./BurgerIngredients";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { useLocation } from "react-router-dom";
 import * as Types from "../../store/actions/actionTypes";
 import { CleanBurger } from "../../store/actions/burgeractions";
 
@@ -12,7 +13,7 @@ export const Div = styled.div`
   position: relative;
 `;
 
-const Clear = styled.div`
+const Clean = styled.div`
   background: linear-gradient(to left, #4b79a1, #283e51);
   position: absolute;
   display: flex;
@@ -36,6 +37,8 @@ const Clear = styled.div`
 `;
 
 const Burger = (props: any) => {
+  const location = useLocation();
+
   let final_arr: any = null;
   final_arr = Object.keys(props.foodlist).map((food) => {
     return (
@@ -48,7 +51,9 @@ const Burger = (props: any) => {
 
   return (
     <Div>
-      {/* <Clear onClick={props.CleanBurger}>Clean</Clear> */}
+      {location.pathname === "/" ? (
+        <Clean onClick={props.CleanBurger}>Clean</Clean>
+      ) : null}
       <BurgerIngredient type="BreadTop" value="1" />
       {props.isBM ? display_text : final_arr}
       <BurgerIngredient type="BreadBottom" value="1" />

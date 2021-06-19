@@ -14,7 +14,15 @@ const Modal = (props) => {
   const gotocheckout = () => {
     props.CloseModal();
     props.GoToCheckout();
-    history.push("/checkout");
+    if (!props.token) {
+      history.push({
+        pathname: "/checkout",
+        state: { redirect: "/auth" },
+      });
+    }
+    else{
+      history.push('/checkout')
+    }
   };
 
   return props.modalstate ? (
@@ -35,7 +43,9 @@ const Modal = (props) => {
             })}
           </Lidiv>
           <div>
-            <Head>Total Price: <span>{props.TotalPrice.toFixed(2)}</span></Head>
+            <Head>
+              Total Price: <span>{props.TotalPrice.toFixed(2)}</span>
+            </Head>
             <Head>Continue to Checkout?</Head>
           </div>
           <div>
@@ -54,6 +64,7 @@ const mapStatetoProps = (state) => {
     foodlist: state.burger.foodlist,
     modalstate: state.burger.modalstate,
     TotalPrice: state.burger.TotalPrice,
+    token: state.auth.token,
   };
 };
 

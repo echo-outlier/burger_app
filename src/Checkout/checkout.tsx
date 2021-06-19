@@ -17,7 +17,6 @@ import Spinner from "../HomeScreen/Logo/Spinner";
 import { useState } from "react";
 import { useHistory, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { RedirectFrom } from "../store/actions/authactions";
 import {
   SubmitOrder,
   Email,
@@ -38,16 +37,17 @@ const Head = styled.h1`
 const Checkout = (props) => {
   const [showspinner, setshowspinner] = useState(false);
   const history = useHistory();
-  const redirect = <Redirect to="/" />;
+  const location = history.location;
 
   useEffect(() => {
     if (props.isBM) {
       history.push("/");
     }
-
-    if (!props.token) {
-      props.RedirectFrom("checkout");
-      history.push("/signup");
+    if (location.state) {
+      history.push({
+        pathname: location.state.redirect,
+        state: { redirect: "/checkout" },
+      });
     }
   }, []);
 
@@ -175,7 +175,6 @@ const mapDispatchtoProps = (dispatch: any) => {
     Number: (value) => dispatch(Number(value)),
     CleanBurger: () => dispatch(CleanBurger()),
     Delivery: (value) => dispatch(Delivery(value)),
-    RedirectFrom: (location) => dispatch(RedirectFrom(location)),
   };
 };
 

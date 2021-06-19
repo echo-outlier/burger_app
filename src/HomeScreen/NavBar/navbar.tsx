@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Logo from "../Logo/Logo";
-import { Div, Navlink, Items, Items1, HiddenPopOver } from "./styles";
+import { Div, Navlink, Items, HiddenPopOver } from "./styles";
 import { useHistory, useLocation, withRouter } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import styled from "styled-components";
@@ -42,6 +42,7 @@ const NavBar = (props: any) => {
   });
 
   const Logout = () => {
+    props.Logout();
     history.push({
       pathname: "/",
       state: {
@@ -69,16 +70,13 @@ const NavBar = (props: any) => {
           <Items>Home</Items>
         </Navlink>
         {!props.token ? (
-          <Navlink to="/signup">
+          <Navlink to="/auth">
             <Items>Signup</Items>
           </Navlink>
         ) : null}
 
         {props.token ? (
           <React.Fragment>
-            <Navlink to="/checkout">
-              <Items1 ref={btnelement}>Checkout</Items1>
-            </Navlink>
             <Navlink to="/orders">
               <Items>Orders</Items>
             </Navlink>

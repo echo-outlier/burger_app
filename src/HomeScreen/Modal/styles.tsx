@@ -14,7 +14,7 @@ export const Backdrop = styled.div<BackdropProps>`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   overflow: ${(props) => {
-    if (props.value == true) {
+    if (props.value === true) {
       return "hidden";
     } else {
       return "scroll";
@@ -31,6 +31,12 @@ export const Div = styled.div`
   margin-top: 20px;
   font-weight: bold;
   font-size: 20px;
+  @media screen and (max-width: 600px) {
+    width: 80%;
+    h4 {
+      font-size: 15px;
+    }
+  }
 `;
 
 export const Lidiv = styled.div`
@@ -38,8 +44,15 @@ export const Lidiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-left:250px;
-  color:#ccc;
+  padding-left: 250px;
+  color: #ccc;
+  @media screen and (max-width: 600px) {
+    padding-left:0;
+    align-items: center;
+    li {
+      font-size: 15px;
+    }
+  }
 `;
 
 export const Button = styled.button`
@@ -61,8 +74,11 @@ export const Button1 = styled(Button)`
   background-color: #eee;
 `;
 export const Head = styled.h4`
-  span{
-    color:#ccc;
-    font-family:Verdana, sans-serif;
+  span {
+    color: #ccc;
+    font-family: Verdana, sans-serif;
+    @media screen and (max-width: 600px) {
+      font-size: 15px;
+    }
   }
 `;

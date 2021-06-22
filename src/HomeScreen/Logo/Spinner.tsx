@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 const Outerdiv = styled.div`
   display: flex;
-  position:absolute;
+  position: absolute;
   width: 100%;
   height: 100vh;
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
+  background: linear-gradient(to right, #e96443, #904e95);
   justify-content: center;
   align-items: center;
 `;

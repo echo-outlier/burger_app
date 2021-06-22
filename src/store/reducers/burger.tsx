@@ -39,6 +39,8 @@ const reducer = (state = initialState, action: any) => {
     prevstate.foodlist[`${action.food}`] =
       prevstate.foodlist[`${action.food}`] + 1;
     prevstate.TotalPrice = state.Pricelist[`${action.food}`] + state.TotalPrice;
+    localStorage.setItem("foodlist", JSON.stringify(prevstate.foodlist));
+    localStorage.setItem("totalprice", JSON.stringify(prevstate.TotalPrice));
   } else if (
     action.type === Types.SUBTRACT &&
     prevstate.foodlist[`${action.food}`] !== 0
@@ -46,11 +48,13 @@ const reducer = (state = initialState, action: any) => {
     prevstate.foodlist[`${action.food}`] =
       prevstate.foodlist[`${action.food}`] - 1;
     prevstate.TotalPrice = state.TotalPrice - state.Pricelist[`${action.food}`];
+    localStorage.setItem("foodlist", JSON.stringify(prevstate.foodlist));
+    localStorage.setItem("totalprice", JSON.stringify(prevstate.TotalPrice));
   } else {
     if (action.type === Types.OPENMODAL) {
       prevstate.modalstate = !state.modalstate;
     }
-    if (action.type === "CloseModal") {
+    if (action.type === Types.CLOSEMODAL) {
       prevstate.modalstate = false;
     }
     if (action.type === Types.CLEANBURGER) {
@@ -61,8 +65,21 @@ const reducer = (state = initialState, action: any) => {
         Meat: 0,
       };
       prevstate.TotalPrice = 0;
+      localStorage.setItem("foodlist", JSON.stringify(prevstate.foodlist));
+      localStorage.setItem("totalprice", JSON.stringify(prevstate.TotalPrice));
     }
-    
+    if (action.type === Types.SETINGREDIENTS) {
+      if (localStorage.getItem("foodlist")) {
+        prevstate.foodlist = JSON.parse(localStorage.getItem("foodlist"));
+        prevstate.TotalPrice = +JSON.parse(localStorage.getItem("totalprice"));
+      } else {
+        localStorage.setItem("foodlist", JSON.stringify(prevstate.foodlist));
+        localStorage.setItem(
+          "totalprice",
+          JSON.stringify(prevstate.TotalPrice)
+        );
+      }
+    }
   }
 
   isBurgerEmpty(prevstate);

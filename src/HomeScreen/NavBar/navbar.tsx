@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import Logo from "../Logo/Logo";
-import { Div, Navlink, Items, HiddenPopOver } from "./styles";
+import { Div, Navlink, Linkdiv, Items, HiddenPopOver } from "./styles";
 import { useHistory, useLocation, withRouter } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Logout } from "../../store/actions/authactions";
+import { Logout } from "../../Store/actions/authactions";
 import { FaUserCircle } from "react-icons/fa";
+import { CleanBurger } from "../../Store/actions/burgeractions";
 
 const User = styled(BiUserCircle)`
   width: 50px;
@@ -43,6 +44,7 @@ const NavBar = (props: any) => {
 
   const Logout = () => {
     props.Logout();
+    props.CleanBurger();
     history.push({
       pathname: "/",
       state: {
@@ -53,6 +55,7 @@ const NavBar = (props: any) => {
 
   return (
     <Div show={props.menu}>
+      <Navlink to="/some" />
       <LogoLink to="/" exact>
         <Logo />
       </LogoLink>
@@ -66,21 +69,40 @@ const NavBar = (props: any) => {
         }}
         popover={props.menu}
       >
-        <Navlink to="/" exact>
-          <Items>Home</Items>
-        </Navlink>
-        {!props.token ? (
-          <Navlink to="/auth">
-            <Items>Signup</Items>
+        <Linkdiv
+          onClick={(e) => {
+            e.preventDefault();
+            props.setmenu();
+          }}
+        >
+          <Navlink to="/" exact>
+            <Items>Home</Items>
           </Navlink>
+        </Linkdiv>
+        {!props.token ? (
+          <Linkdiv
+            onClick={(e) => {
+              e.preventDefault();
+              props.setmenu();
+            }}
+          >
+            <Navlink to="/auth">
+              <Items>Signup</Items>
+            </Navlink>
+          </Linkdiv>
         ) : null}
 
         {props.token ? (
-          <React.Fragment>
+          <Linkdiv
+            onClick={(e) => {
+              e.preventDefault();
+              props.setmenu();
+            }}
+          >
             <Navlink to="/orders">
               <Items>Orders</Items>
             </Navlink>
-          </React.Fragment>
+          </Linkdiv>
         ) : null}
       </HiddenPopOver>
     </Div>
@@ -95,6 +117,7 @@ const mapStatetoProps = (state) => {
 const mapDispatchtoProps = (dispatch) => {
   return {
     Logout: () => dispatch(Logout()),
+    CleanBurger: () => dispatch(CleanBurger()),
   };
 };
 

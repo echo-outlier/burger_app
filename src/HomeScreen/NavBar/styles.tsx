@@ -23,6 +23,12 @@ export const Div = styled.div<DivProps>`
   }
 `;
 
+export const Linkdiv = styled.div`
+  width: 100%;
+  position: relative;
+  display: flex;
+`;
+
 interface HiddenPopOverProps {
   popover: string;
 }
@@ -36,8 +42,9 @@ export const HiddenPopOver = styled.div<HiddenPopOverProps>`
   justify-content: center;
   align-items: strech;
   margin-top: 20px;
-  z-index:1;
+  z-index: 1;
   a {
+    width: 100%;
     padding: 5px;
     text-align: center;
     background: linear-gradient(to left, #4b79a1, #283e51);
@@ -68,7 +75,7 @@ export const Items1 = styled.button`
   cursor: pointer;
   background-color: inherit;
   border: none;
-  
+
   &:enabled {
     &:hover {
       color: #d16b2b;

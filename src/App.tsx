@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Burger from "./HomeScreen/BurgerDisplay/Burger";
 import styled from "styled-components";
-
 import NavBar from "./HomeScreen/NavBar/navbar";
 import { Route } from "react-router-dom";
 import Checkout from "./Checkout/checkout";
@@ -9,14 +8,18 @@ import GlobalStyle from "./Globalstyles";
 import Order from "./Orders/Order";
 import { connect } from "react-redux";
 import Auth from "./Auth/auth";
-import { isAuthencated } from "./store/actions/authactions";
+import { isAuthencated } from "./Store/actions/authactions";
 import Spinner from "./HomeScreen/Logo/Spinner";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import HomePage from "./HomePage";
+import * as Types from "./Store/actions/actionTypes";
 
 const Div = styled.div`
   width: 800px;
   margin: auto;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 const Backdrop = styled.div`
@@ -30,10 +33,20 @@ const Backdrop = styled.div`
 const App = (props) => {
   const [menu, setmenu] = useState("none");
   const history = useHistory();
-  console.log(process.env.REACT_APP_NOT_SECRET_CODE);
   useEffect(() => {
     props.isAuthenticated();
   }, []);
+
+  useEffect(() => {
+    props.setIng();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("something is changed ");
+  //   if (props.purchased) {
+  //     props.set_false();
+  //   }
+  // }, [props.purchased]);
 
   const menuhandler = () => {
     if (menu === "none") {
@@ -49,7 +62,7 @@ const App = (props) => {
   return (
     <Backdrop
       onClick={(e) => {
-        if (menu == "none") {
+        if (menu === "none") {
           e.stopPropagation();
         } else {
           setmenu("none");
@@ -85,12 +98,15 @@ const mapStatetoProps = (state) => {
     token: state.auth.token,
     loading: state.auth.loading,
     redirect: state.auth.redirectFrom,
+    purchased: state.checkout.purchase,
   };
 };
 
 const mapDispatchtoProps = (dispatch) => {
   return {
     isAuthenticated: () => dispatch(isAuthencated()),
+    setIng: () => dispatch({ type: Types.SETINGREDIENTS }),
+    set_false: () => dispatch({ type: Types.SET_PURCHASED_TO_FALSE }),
   };
 };
 

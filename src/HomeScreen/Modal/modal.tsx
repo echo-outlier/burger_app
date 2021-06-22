@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { Backdrop, Div, Lidiv, Head, Button, Button1 } from "./styles";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import * as Types from "../../Store/actions/actionTypes";
 
 const check = (prevprops, nextprops) => {
   return prevprops.modalstate === nextprops.modalstate;
@@ -13,15 +14,13 @@ const Modal = (props) => {
 
   const gotocheckout = () => {
     props.CloseModal();
-    props.GoToCheckout();
     if (!props.token) {
-      history.push({
+      history.replace({
         pathname: "/checkout",
         state: { redirect: "/auth" },
       });
-    }
-    else{
-      history.push('/checkout')
+    } else {
+      history.push("/checkout");
     }
   };
 
@@ -70,8 +69,7 @@ const mapStatetoProps = (state) => {
 
 const mapDispatchtoProps = (dispatch: any) => {
   return {
-    GoToCheckout: () => dispatch({ type: "GoToCheckout" }),
-    CloseModal: () => dispatch({ type: "CloseModal" }),
+    CloseModal: () => dispatch({ type: Types.CLOSEMODAL }),
   };
 };
 

@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
-import burger_reducer from "./store/reducers/burger";
-import checkout_reducer from "./store/reducers/checkout";
+import burger_reducer from "./Store/reducers/burger";
+import checkout_reducer from "./Store/reducers/checkout";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import auth_reducer from "./store/reducers/auth";
+import auth_reducer from "./Store/reducers/auth";
 
 const logger = (store: any) => {
   return (next: any) => {

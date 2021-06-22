@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import Form from '../Checkout/styles'
 
 export {
   Form,
@@ -11,7 +10,7 @@ export {
   Inputname,
   Button,
   Div1,
-} from "../Checkout/styles";
+} from "../Form/styles";
 
 export const H1 = styled.h1`
   text-align: center;

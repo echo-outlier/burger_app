@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+interface InputProps {
+  error: string;
+  focus: boolean;
+  touched: boolean;
+}
+
 export const Form = styled.form`
   display: flex;
   justify-content: center;
@@ -10,6 +16,17 @@ export const Form = styled.form`
   width: 600px;
   margin: 20px auto;
   align-items: center;
+  z-index: 2000;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    /* margin-top: 20px; */
+    h1 {
+      font-size: 15px;
+    }
+    span {
+      font-size: 20px;
+    }
+  }
 `;
 
 export const Div = styled.div`
@@ -21,38 +38,22 @@ export const Div = styled.div`
 `;
 
 export const Div1 = styled(Div)`
-  gap:5px;
-  .text{
-    font-size:14px;
+  gap: 5px;
+  .text {
+    font-size: 14px;
     text-align: center;
-    margin-top:10px;
-    &:hover{
+    margin-top: 10px;
+    &:hover {
       cursor: pointer;
-      font-weight:bold;
+      font-weight: bold;
     }
   }
-`
+`;
 
 export const Name = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 20px;
-`;
-
-export const Input = styled.input`
-  width: 300px;
-  font-weight: bolder;
-  height: 40px;
-  border: none;
-  font-size: 15px;
-  padding: 15px;
-  outline: none;
-  transition: background-color, color 0.3s ease;
-  background-color: #eee;
-  &:focus {
-    background-color: #201d1d;
-    color: white;
-  }
 `;
 
 export const Inputdiv = styled.div`
@@ -65,7 +66,34 @@ export const Inputdiv1 = styled.div`
   background-color: #eee;
 `;
 
-export const Inputname = styled.input`
+export const Input = styled.input<InputProps>`
+  width: 300px;
+  font-weight: bolder;
+  height: 40px;
+  border: none;
+  font-size: 15px;
+  padding: 15px;
+  outline: none;
+  transition: background-color, color 0.3s ease;
+  background-color: #eee;
+  border: ${(props) => {
+    if (
+      props.error !== null &&
+      props.focus === false &&
+      props.touched === true
+    ) {
+      return "1px solid red";
+    } else {
+      return "none";
+    }
+  }};
+  &:focus {
+    background-color: #201d1d;
+    color: white;
+  }
+`;
+
+export const Inputname = styled.input<InputProps>`
   width: 140px;
   font-weight: bolder;
   background-color: #eee;
@@ -75,6 +103,17 @@ export const Inputname = styled.input`
   padding: 15px;
   outline: none;
   transition: background-color, color 0.3s ease;
+  border: ${(props) => {
+    if (
+      props.error !== null &&
+      props.focus === false &&
+      props.touched === true
+    ) {
+      return "1px solid red";
+    } else {
+      return "none";
+    }
+  }};
   &:focus {
     background-color: #201d1d;
     color: white;
@@ -82,8 +121,11 @@ export const Inputname = styled.input`
 `;
 
 export const Error = styled.div`
-  margin-top: 5px;
   font-size: 12px;
+  /* background: linear-gradient(to left, #4b79a1, #283e51); */
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-left: 5px;
+  color: red;
 `;
 
 export const Select = styled.select`
@@ -105,7 +147,7 @@ export const Selectdiv = styled.div`
   align-items: flex-start;
   font-weight: bolder;
   font-size: 12px;
-  height:40px;
+  height: 40px;
   background-color: #eee;
 `;
 

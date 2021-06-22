@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { H1, Form, Div, Div1, Error, Inputdiv1, Button, Input } from "./styles";
-import { auth, isAuthencated } from "../store/actions/authactions";
+import { auth, isAuthencated } from "../Store/actions/authactions";
 import Spinner from "../HomeScreen/Logo/Spinner";
 
 const Auth = (props) => {
@@ -34,17 +34,8 @@ const Auth = (props) => {
         setCheckoutText(<H1>Please Login Before Checking Out</H1>);
       }
     }
-  }, []);
+  }, [history, location, props.token]);
 
-  let errorMsg = null;
-  if (props.error) {
-    errorMsg = props.error;
-  }
-
-  let text = "Sign In";
-  if (isup) {
-    text = "Sign Up";
-  }
 
   let form = (
     <React.Fragment>
@@ -58,8 +49,10 @@ const Auth = (props) => {
               placeholder="Email Id"
               value={email}
               onChange={(e) => setemail(e.target.value)}
+              focus={props.error}
+              error={props.error}
+              touched={props.error}
             />
-            {/* {props.emailerror ? <Error>{props.emailerror}</Error> : null} */}
           </Inputdiv1>
           <Inputdiv1>
             <Input
@@ -67,6 +60,9 @@ const Auth = (props) => {
               placeholder="Password"
               value={password}
               onChange={(e) => setpassword(e.target.value)}
+              focus={props.error}
+              error={props.error}
+              touched={props.error}
             />
             {/* {props.number ? <Error>{props.numbererror}</Error> : null} */}
           </Inputdiv1>

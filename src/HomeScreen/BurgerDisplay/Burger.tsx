@@ -3,14 +3,40 @@ import BurgerIngredient from "./BurgerIngredients";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
-import * as Types from "../../store/actions/actionTypes";
-import { CleanBurger } from "../../store/actions/burgeractions";
+import { CleanBurger } from "../../Store/actions/burgeractions";
 
 export const Div = styled.div`
   height: 450px;
   width: 100%;
   overflow: auto;
   position: relative;
+  h2 {
+    text-align: center;
+  }
+  @media screen and (max-width: 700px) {
+    height: 400px;
+    h2 {
+      font-size: 20px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    height: 350px;
+    h2 {
+      font-size: 17px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    height: 300px;
+    h2 {
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    height: 250px;
+    h2 {
+      font-size: 10px;
+    }
+  }
 `;
 
 const Clean = styled.div`
@@ -34,6 +60,12 @@ const Clean = styled.div`
     background: linear-gradient(to right, #4b79a1, #283e51);
     transform: scale(1.05);
   }
+  @media screen and (max-width: 600px) {
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
+    left: 0;
+  }
 `;
 
 const Burger = (props: any) => {
@@ -45,9 +77,7 @@ const Burger = (props: any) => {
       <BurgerIngredient type={food} value={props.foodlist[food]} key={food} />
     );
   });
-  const display_text = (
-    <h2 style={{ textAlign: "center" }}>Add Some Ingredients Here</h2>
-  );
+  const display_text = <h2>Add Some Ingredients Here</h2>;
 
   return (
     <Div>

@@ -6,17 +6,24 @@ import {
   Div,
   Price,
   Div1,
-  Buttonstyle,
   Flex,
   SubmitButton,
   SubmitButtonDisabled,
   PlusButton,
   MinusButton,
 } from "./styles";
-import { Add, Subtract, OpenModal } from "../../store/actions/burgeractions";
+import { Add, Subtract, OpenModal } from "../../Store/actions/burgeractions";
 
 const BurgerInfo = (props: any) => {
   const food_data = props.foodlist;
+
+  const Handler = (food, func) => {
+    if (func === "add") {
+      props.Add(food);
+    } else {
+      props.Subtract(food);
+    }
+  };
 
   return (
     <Div height={window.innerHeight}>
@@ -25,9 +32,9 @@ const BurgerInfo = (props: any) => {
           return (
             <React.Fragment key={food}>
               <h1>{food}</h1>
-              <PlusButton onClick={() => props.Add(food)}>+</PlusButton>
+              <PlusButton onClick={() => Handler(food, "add")}>+</PlusButton>
               <span>{food_data[`${food}`]}</span>
-              <MinusButton onClick={() => props.Subtract(food)}>
+              <MinusButton onClick={() => Handler(food, "subtract")}>
                 -
               </MinusButton>
               <Hr />
@@ -37,7 +44,8 @@ const BurgerInfo = (props: any) => {
       </Div1>
       <Flex>
         <Price>
-          Total Price: <span>{props.TotalPrice.toFixed(2)}</span>
+          Total Price: <br></br>
+          <span>{props.TotalPrice.toFixed(2)}</span>
         </Price>
         {props.TotalPrice > 0 ? (
           <SubmitButton onClick={props.ModalHandler}>Order Now</SubmitButton>
@@ -63,6 +71,7 @@ const mapDispatchtoProps = (dispatch: any) => {
     Add: (food) => dispatch(Add(food)),
     Subtract: (food) => dispatch(Subtract(food)),
     ModalHandler: () => dispatch(OpenModal()),
+    setIng: () => dispatch({ type: "SETINGREDIENTS" }),
   };
 };
 

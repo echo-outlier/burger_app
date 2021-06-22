@@ -2,10 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import burgerlogo from "../../asset/images/logo.png";
 
-const Div = styled.div`
-  width: 50px;
-  height: 40px;
-`;
 
 const Image = styled.img`
   width: 100%;

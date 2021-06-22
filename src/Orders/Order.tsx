@@ -12,8 +12,6 @@ import {
   NoOrders,
 } from "./styles";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
-import styled from "styled-components";
-import Skeleton from "@material-ui/lab/Skeleton";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../HomeScreen/Logo/Spinner";
@@ -22,25 +20,39 @@ const Order = (props) => {
   const [orderlist, setorderlist] = useState(null);
   const [spinner, setspinner] = useState(true);
   const history = useHistory();
+
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", alertUser);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", alertUser);
+  //   };
+  // }, []);
+  // const alertUser = (e) => {
+  //   // e.preventDefault();
+  //   // localStorage.removeItem("token");
+  //   // alert("Windows reloaded");
+  //   // e.returnValue = "something";
+  // };
+
   useEffect(() => {
     if (!props.token) {
       history.push("/");
     }
     const userId = localStorage.getItem("userId");
-    const queryparam =
-      `?auth=${props.token}&orderBy="userId"&equalTo="${userId}"`
+    const queryparam = `?auth=${props.token}&orderBy="userId"&equalTo="${userId}"`;
     axios
-      .get(`/BurgerOrders.json${queryparam}` )
+      .get(`/BurgerOrders.json${queryparam}`)
       .then((response) => {
         const data = response.data;
         let orders = [];
         Object.keys(data).map((order) => orders.push(data[`${order}`]));
-        setorderlist(orders);
+        if (orders.length) setorderlist(orders);
+        else setspinner(false);
       })
       .catch((error) => {
         setspinner(false);
       });
-  }, []);
+  }, [history, props.token]);
 
   return (
     <Div>
@@ -67,11 +79,11 @@ const Order = (props) => {
                 <IngredientsInfo>
                   {Object.keys(order).map((info) => {
                     return info === "customer"
-                      ? Object.keys(order.ingredients).map((details) => {
+                      ? Object.keys(order.foodlist).map((details) => {
                           return (
                             <Childdiv key={details}>
                               <span>{details + ": "}</span>
-                              {order.ingredients[`${details}`]}
+                              {order.foodlist[`${details}`]}
                             </Childdiv>
                           );
                         })

@@ -13,7 +13,6 @@ const BreadTop = styled.div`
   height: 20%;
   width: 50%;
   background: linear-gradient(#c87647, #e27b36);
-  /* background: linear-gradient(#bc581e, #e27b36); */
   border-radius: 50% 50% 0 0;
   box-shadow: inset -15px 0 #c15711;
   margin: 2% auto;

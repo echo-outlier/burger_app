@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../../Checkout/styles";
+import { Button } from "../../Form/styles";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
 
@@ -19,13 +19,17 @@ export const Div = styled.div<DivProps>`
   width: 100%;
   height: ${(props) => props.height - (450 + 56)}px;
   background: linear-gradient(to left, #4b79a1, #283e51);
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    height: auto;
+  }
 `;
 
 export const Div1 = styled.div`
   width: 400px;
   display: grid;
-  grid-template-columns: 40% 20% 10% 50px;
-  grid-column-gap: 20px;
+  grid-template-columns: 55% 15% 15% 15%;
+  /* grid-column-gap: 20px; */
   h1 {
     text-align: start;
     font-size: 20px;
@@ -38,6 +42,26 @@ export const Div1 = styled.div`
     color: #ccc;
     font-size: 30px;
     justify-self: center;
+  }
+  @media screen and (max-width: 600px) {
+    width:80%;
+    margin-top: 20px;
+    h1 {
+      font-size: 15px;
+    }
+    span {
+      font-size: 20px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    width:80%;
+    margin-top: 20px;
+    h1 {
+      font-size: 13px;
+    }
+    span {
+      font-size: 15px;
+    }
   }
 `;
 
@@ -76,6 +100,10 @@ export const PlusButton = styled(AiFillPlusCircle)`
   &:hover {
     fill: black;
   }
+  @media screen and (max-width: 600px) {
+    width:20px;
+    height:20px;
+  }
 `;
 
 export const MinusButton = styled(AiFillMinusCircle)`
@@ -89,6 +117,10 @@ export const MinusButton = styled(AiFillMinusCircle)`
   justify-self: flex-start;
   &:hover {
     fill: black;
+  }
+  @media screen and (max-width: 600px) {
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -107,6 +139,11 @@ export const SubmitButton = styled(Button)`
   margin-bottom: 10px;
   cursor: pointer;
   font-weight: bold;
+  @media screen and (max-width: 600px) {
+    width: 100px;
+    height: 35px;
+    font-size: 14px;
+  }
 `;
 
 export const SubmitButtonDisabled = styled.button`
@@ -138,12 +175,28 @@ export const SubmitButtonDisabled = styled.button`
       }
     }
   }
+  @media screen and (max-width: 600px) {
+    width: 100px;
+    height: 35px;
+    font-size: 14px;
+    &:disabled {
+      &:hover {
+        ::after {
+          display: inline-block;
+          font-size: 12px;
+          margin-top: -10px;
+          padding: 5px;
+        }
+      }
+    }
+  }
 `;
 
 export const Price = styled.div`
   font-size: 20px;
   font-weight: bold;
   margin: 15px 0;
+  text-align: center;
   span {
     color: #ccc;
     font-family: Verdana, sans-serif;

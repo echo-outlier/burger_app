@@ -29,7 +29,6 @@ const SubmitForm = (props) => {
   useEffect(() => {
     if (props.purchased) {
       history.push("/");
-      console.log("PUSHED");
     }
   }, [props.purchased, history]);
 
@@ -46,11 +45,9 @@ const SubmitForm = (props) => {
     } else {
       alert("Please Fill All the Fields Correctly");
     }
-    // console.log("SUBMITED THE ORDER");
   };
 
   const ChangeInput = (event, type) => {
-    console.log("change");
     let value = event.target.value;
     switch (type) {
       case Types.FIRST:
@@ -75,7 +72,6 @@ const SubmitForm = (props) => {
     <Form
       id="form"
       onClick={(e) => {
-        console.log("CLICK");
         const el = document.getElementById("form");
         const active = el.contains(document.activeElement);
         if (active) {

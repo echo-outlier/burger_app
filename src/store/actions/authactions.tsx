@@ -30,7 +30,6 @@ export const Logout = () => {
 
 const checkAuthTimeout = (expireTime) => {
   return (dispatch) => {
-    console.log(expireTime);
     setTimeout(dispatch(Logout), expireTime);
   };
 };
@@ -38,7 +37,6 @@ const checkAuthTimeout = (expireTime) => {
 export const auth = (email, password, isSignUp) => {
   return (dispatch) => {
     dispatch(authStart());
-    console.log(email, password);
     const authdata = {
       email: email,
       password: password,
@@ -54,7 +52,6 @@ export const auth = (email, password, isSignUp) => {
         localStorage.setItem("token", response.data.idToken);
         localStorage.setItem("userId", response.data.localId);
         dispatch(authSuccess(response.data.idToken, response.data.localId));
-        console.log(response.data);
         dispatch(checkAuthTimeout(response.data.expiresIn * 1000));
       })
       .catch((error) => {
@@ -80,12 +77,10 @@ export const isAuthencated = () => {
           authData
         )
         .then((response) => {
-          console.log(response.data.users[0].localId);
           dispatch(authSuccess(token, userId));
         })
         .catch((error) => {
           dispatch(Logout());
-          console.log(error.response);
         });
     }
   };

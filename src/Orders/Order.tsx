@@ -21,19 +21,6 @@ const Order = (props) => {
   const [spinner, setspinner] = useState(true);
   const history = useHistory();
 
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", alertUser);
-  //   return () => {
-  //     window.removeEventListener("beforeunload", alertUser);
-  //   };
-  // }, []);
-  // const alertUser = (e) => {
-  //   // e.preventDefault();
-  //   // localStorage.removeItem("token");
-  //   // alert("Windows reloaded");
-  //   // e.returnValue = "something";
-  // };
-
   useEffect(() => {
     if (!props.token) {
       history.push("/");

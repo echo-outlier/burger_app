@@ -109,19 +109,14 @@ export const SubmitOrder = (input, foodlist, userId, price, delivery) => {
       },
     };
     dispatch(StartPurchase());
-    console.log("ORDER", order);
     axios
       .post("/BurgerOrders.json", order)
       .then((response) => {
-        console.log(response);
-        console.log("ORDER SUCCESSS");
         dispatch(OrderPurchased());
         dispatch(CleanBurger());
         dispatch(SetPurchaseToFalse());
       })
       .catch((error) => {
-        console.log("ORDER FAILED");
-        console.log(error);
         dispatch(OrderFailed());
       });
   };

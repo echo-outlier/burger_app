@@ -1,8 +1,10 @@
-A React/Redux app in which you can login, create and order a burger integrated with firebase authentication.
+## A React/Redux app in which you can login, create and order a burger integrated with firebase authentication.
 
-This is my First React/Redux and it was a great learning experience for me.
+### This is my First React/Redux and it was a great learning experience for me.
 
-Feel free to Contribute.
+### https://echo-outlier.github.io/burger_app/
+
+#### Feel free to Contribute.
 
 ## To Run This Project
 

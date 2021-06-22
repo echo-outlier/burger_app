@@ -37,7 +37,7 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router basename="burger_app">
       <Provider store={store}>
         <App />
       </Provider>

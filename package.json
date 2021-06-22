@@ -1,5 +1,6 @@
 {
   "name": "burger_app",
+  "homepage": "http://echo_outlier.github.io/burger_app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,6 +37,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "BROWSER='firefox developer edition' react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
